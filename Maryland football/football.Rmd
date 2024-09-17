@@ -1,0 +1,135 @@
+---
+title: "Maryland Football"
+output: html_document
+date: "2024-09-10"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+# Load dplyr package (ensure this line is executed)
+library(dplyr)
+```
+
+```{r}
+file_path <- "umd_penalties_locks.csv"
+
+# Reading the CSV file
+umd_penalties_locks <- read.csv("umd_penalties_locks.csv")
+umd_turnovers_locks <- read.csv("umd_turnovers_locks.csv")
+```
+
+```{r}
+# Display the first few rows of the data
+head(umd_penalties_locks)
+```
+
+```{r}
+fourth_period_data <- umd_penalties_locks %>%
+  group_by(period) %>%         # Grouping by the "Period" column
+  filter(period == 4)          # Filtering only the fourth period
+
+# Display the filtered data
+print(fourth_period_data)
+```
+
+```{r}
+specific_teams <- c("Purdue", "Rutgers", "Illinois", "Michigan State")
+
+filtered_data <- umd_penalties_locks %>%
+  filter(def_pos_team %in% specific_teams, period == 4)
+
+# Display the filtered data
+print(filtered_data)
+```
+
+
+
+``` {r}
+library(stringr)
+umd_games_win_loss <- read.csv("umd_games.csv") %>%
+  rename(win_loss = X) %>%
+  mutate(game_date = paste(year,week,sep = "_"))
+
+umd_game_total_wins <- umd_games_win_loss %>%
+    filter(win_loss == "Win") %>%
+  group_by(year) %>%
+  count(win_loss)
+umd_game_total_losses <- umd_games_win_loss %>%
+    filter(win_loss == "Loss") %>%
+  group_by(year) %>%
+  count(win_loss)
+
+
+umd_penalties_with_outcomes <- umd_penalties_locks %>%
+  filter(year != 2020) %>%
+  mutate(game_date = paste(year,week,sep = "_")) %>%
+  select(game_date,play_type) %>% 
+  filter(play_type == "Penalty") %>%
+  left_join(umd_games_win_loss,by = "game_date")
+
+umd_pentalties_count_win <- umd_penalties_with_outcomes %>%
+  filter(win_loss == "Win") %>%
+  group_by(year) %>%
+  count(win_loss) %>%
+  rename(wins = n) %>%
+  distinct() %>%
+  select(-win_loss)
+umd_pentalties_count_loss <- umd_penalties_with_outcomes %>%
+  filter(win_loss == "Loss") %>%
+  group_by(year) %>%
+  count(win_loss) %>%
+  rename(losses = n) %>%
+  distinct() %>%
+  select(-win_loss)
+
+umd_penalties_count_win_loss <- full_join(umd_pentalties_count_win,umd_pentalties_count_loss)
+```
+``` {r}
+library(stringr)
+
+umd_turnovers_with_outcomes <- umd_turnovers_locks %>%
+  filter(year != 2020) %>%
+  mutate(game_date = paste(year,week,sep = "_")) %>%
+  select(game_date,play_type) %>% 
+  left_join(umd_games_win_loss,by = "game_date")
+
+umd_turnovers_count_win <- umd_turnovers_with_outcomes %>%
+  filter(win_loss == "Win") %>%
+  group_by(year) %>%
+  count(win_loss) %>%
+  rename(wins = n) %>%
+  distinct() %>%
+  select(-win_loss)
+umd_turnovers_count_loss <- umd_turnovers_with_outcomes %>%
+  filter(win_loss == "Loss") %>%
+  group_by(year) %>%
+  count(win_loss) %>%
+  rename(losses = n) %>%
+  distinct() %>%
+  select(-win_loss)
+
+umd_turnovers_count_win_loss <- full_join(umd_turnovers_count_win,umd_turnovers_count_loss)
+```
