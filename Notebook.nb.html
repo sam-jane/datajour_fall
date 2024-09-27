@@ -1759,24 +1759,79 @@ beneath the code.</p>
 the chunk or by placing your cursor inside it and pressing
 <em>Cmd+Shift+Enter</em>.</p>
 <!-- rnb-text-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdChjYXJzKVxuYGBgIn0= -->
-<pre class="r"><code>plot(cars)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBUdXJuIG9mZiBzY2llbnRpZmljIG5vdGF0aW9uXG5vcHRpb25zKHNjaXBlbj05OTkpXG5cbiMgTG9hZCB0aGUgdGlkeXZlcnNlLiBJZiB5b3UgaGF2ZSBub3QgaW5zdGFsbGVkIHRoZSB0aWR5dmVyc2UgYWxyZWFkeSwgcmVtb3ZlIHRoZSAjIGZyb20gdGhlIG5leHQgbGluZSBhbmQgcnVuIGl0IGZpcnN0LiAgXG4jIGluc3RhbGwucGFja2FnZXMoJ3RpZHl2ZXJzZScpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmBgYCJ9 -->
+<pre class="r"><code># Turn off scientific notation
+options(scipen=999)
+
+# Load the tidyverse. If you have not installed the tidyverse already, remove the # from the next line and run it first.  
+# install.packages(&#39;tidyverse&#39;)
+library(tidyverse)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoi4pSA4pSAIEF0dGFjaGluZyBjb3JlIHRpZHl2ZXJzZSBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDIuMC4wIOKUgOKUgFxu4pyUIGRwbHlyICAgICAxLjEuNCAgICAg4pyUIHJlYWRyICAgICAyLjEuNVxu4pyUIGZvcmNhdHMgICAxLjAuMCAgICAg4pyUIHN0cmluZ3IgICAxLjUuMVxu4pyUIGdncGxvdDIgICAzLjUuMSAgICAg4pyUIHRpYmJsZSAgICAzLjIuMVxu4pyUIGx1YnJpZGF0ZSAxLjkuMyAgICAg4pyUIHRpZHlyICAgICAxLjMuMVxu4pyUIHB1cnJyICAgICAxLjAuMiAgICAg4pSA4pSAIENvbmZsaWN0cyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlX2NvbmZsaWN0cygpIOKUgOKUgFxu4pyWIGRwbHlyOjpmaWx0ZXIoKSBtYXNrcyBzdGF0czo6ZmlsdGVyKClcbuKcliBkcGx5cjo6bGFnKCkgICAgbWFza3Mgc3RhdHM6OmxhZygpXG7ihLkgVXNlIHRoZSBcdTAwMWJdODs7aHR0cDovL2NvbmZsaWN0ZWQuci1saWIub3JnL1x1MDAwN2NvbmZsaWN0ZWQgcGFja2FnZVx1MDAxYl04OztcdTAwMDcgdG8gZm9yY2UgYWxsIGNvbmZsaWN0cyB0byBiZWNvbWUgZXJyb3JzXG4ifQ== -->
+<pre><code>── Attaching core tidyverse packages ──────────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     ── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShsdWJyaWRhdGUpXG5gYGAifQ== -->
+<pre class="r"><code>library(lubridate)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the
-toolbar or by pressing <em>Cmd+Option+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and
-output will be saved alongside it (click the <em>Preview</em> button or
-press <em>Cmd+Shift+K</em> to preview the HTML file).</p>
-<p>The preview shows you a rendered HTML copy of the contents of the
-editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not
-run any R code chunks. Instead, the output of the chunk when it was last
-run in the editor is displayed.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb2FkIHRoZSBub24gdm90ZXJzIGRhdGFcbm5vbl92b3RlcnMgPC0gcmVhZF9jc3YoXCJub252b3RlcnNfZGF0YS5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code># Load the non voters data
+non_voters &lt;- read_csv(&quot;nonvoters_data.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogNTgzNiBDb2x1bW5zOiAxMTnilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgICAoNSk6IGVkdWMsIHJhY2UsIGdlbmRlciwgaW5jb21lX2NhdCwgdm90ZXJfY2F0ZWdvcnlcbmRibCAoMTE0KTogUmVzcElkLCB3ZWlnaHQsIFExLCBRMl8xLCBRMl8yLCBRMl8zLCBRMl80LCBRMl81LCBRMl82LCBRMl83LCBRMl84LCBRMl85LC4uLlxu4oS5IFVzZSBgc3BlYygpYCB0byByZXRyaWV2ZSB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbiBmb3IgdGhpcyBkYXRhLlxu4oS5IFNwZWNpZnkgdGhlIGNvbHVtbiB0eXBlcyBvciBzZXQgYHNob3dfY29sX3R5cGVzID0gRkFMU0VgIHRvIHF1aWV0IHRoaXMgbWVzc2FnZS5cbiJ9 -->
+<pre><code>Rows: 5836 Columns: 119── Column specification ────────────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr   (5): educ, race, gender, income_cat, voter_category
+dbl (114): RespId, weight, Q1, Q2_1, Q2_2, Q2_3, Q2_4, Q2_5, Q2_6, Q2_7, Q2_8, Q2_9,...
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudm90ZXJfcmVzcG9uc2VRMjYgPC0gbm9uX3ZvdGVycyB8PiBcbmdyb3VwX2J5KFEyNikgfD5cbnN1bW1hcml6ZSAoY291bnRfdm90ZXJzID0gbigpKVxuYGBgIn0= -->
+<pre class="r"><code>voter_responseQ26 &lt;- non_voters |&gt; 
+group_by(Q26) |&gt;
+summarize (count_voters = n())</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2VpZ2h0X3Jlc3BvbnNlUTI2IDwtIG5vbl92b3RlcnMgfD4gXG4gIGZpbHRlcihRMjYgIT0gLTEpIHw+XG4gIGdyb3VwX2J5KFEyNikgfD4gXG4gIHN1bW1hcml6ZShjb3VudF93ZWlnaHQgPSBzdW0od2VpZ2h0KSkgfD4gXG4gIG11dGF0ZShwZXJjZW50YWdlID0gKChjb3VudF93ZWlnaHQgLyA1NzU3Ljk4OSkgKiAxMDApKVxuYGBgIn0= -->
+<pre class="r"><code>weight_responseQ26 &lt;- non_voters |&gt; 
+  filter(Q26 != -1) |&gt;
+  group_by(Q26) |&gt; 
+  summarize(count_weight = sum(weight)) |&gt; 
+  mutate(percentage = ((count_weight / 5757.989) * 100))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudG90YWxfd2VpZ2h0IDwtIG5vbl92b3RlcnMgfD5cbmZpbHRlcihRMjYgIT0gLTEpIHw+XG5zdW1tYXJpemUodG90YWwgPSBzdW0od2VpZ2h0KSlcbmBgYCJ9 -->
+<pre class="r"><code>total_weight &lt;- non_voters |&gt;
+filter(Q26 != -1) |&gt;
+summarize(total = sum(weight))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTm90ZWJvb2siCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KClRoaXMgaXMgYW4gW1IgTWFya2Rvd25dKGh0dHA6Ly9ybWFya2Rvd24ucnN0dWRpby5jb20pIE5vdGVib29rLiBXaGVuIHlvdSBleGVjdXRlIGNvZGUgd2l0aGluIHRoZSBub3RlYm9vaywgdGhlIHJlc3VsdHMgYXBwZWFyIGJlbmVhdGggdGhlIGNvZGUuIAoKVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkNtZCtTaGlmdCtFbnRlciouIAoKYGBge3J9CnBsb3QoY2FycykKYGBgCgpBZGQgYSBuZXcgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpJbnNlcnQgQ2h1bmsqIGJ1dHRvbiBvbiB0aGUgdG9vbGJhciBvciBieSBwcmVzc2luZyAqQ21kK09wdGlvbitJKi4KCldoZW4geW91IHNhdmUgdGhlIG5vdGVib29rLCBhbiBIVE1MIGZpbGUgY29udGFpbmluZyB0aGUgY29kZSBhbmQgb3V0cHV0IHdpbGwgYmUgc2F2ZWQgYWxvbmdzaWRlIGl0IChjbGljayB0aGUgKlByZXZpZXcqIGJ1dHRvbiBvciBwcmVzcyAqQ21kK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuIAoKVGhlIHByZXZpZXcgc2hvd3MgeW91IGEgcmVuZGVyZWQgSFRNTCBjb3B5IG9mIHRoZSBjb250ZW50cyBvZiB0aGUgZWRpdG9yLiBDb25zZXF1ZW50bHksIHVubGlrZSAqS25pdCosICpQcmV2aWV3KiBkb2VzIG5vdCBydW4gYW55IFIgY29kZSBjaHVua3MuIEluc3RlYWQsIHRoZSBvdXRwdXQgb2YgdGhlIGNodW5rIHdoZW4gaXQgd2FzIGxhc3QgcnVuIGluIHRoZSBlZGl0b3IgaXMgZGlzcGxheWVkLgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTm90ZWJvb2siCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KClRoaXMgaXMgYW4gW1IgTWFya2Rvd25dKGh0dHA6Ly9ybWFya2Rvd24ucnN0dWRpby5jb20pIE5vdGVib29rLiBXaGVuIHlvdSBleGVjdXRlIGNvZGUgd2l0aGluIHRoZSBub3RlYm9vaywgdGhlIHJlc3VsdHMgYXBwZWFyIGJlbmVhdGggdGhlIGNvZGUuIAoKVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkNtZCtTaGlmdCtFbnRlciouIAoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKYGBgCgpgYGB7cn0KIyBUdXJuIG9mZiBzY2llbnRpZmljIG5vdGF0aW9uCm9wdGlvbnMoc2NpcGVuPTk5OSkKCiMgTG9hZCB0aGUgdGlkeXZlcnNlLiBJZiB5b3UgaGF2ZSBub3QgaW5zdGFsbGVkIHRoZSB0aWR5dmVyc2UgYWxyZWFkeSwgcmVtb3ZlIHRoZSAjIGZyb20gdGhlIG5leHQgbGluZSBhbmQgcnVuIGl0IGZpcnN0LiAgCiMgaW5zdGFsbC5wYWNrYWdlcygndGlkeXZlcnNlJykKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkobHVicmlkYXRlKQpgYGAKCmBgYHtyfQojIExvYWQgdGhlIG5vbiB2b3RlcnMgZGF0YQpub25fdm90ZXJzIDwtIHJlYWRfY3N2KCJub252b3RlcnNfZGF0YS5jc3YiKQpgYGAKCmBgYHtyfQp2b3Rlcl9yZXNwb25zZVEyNiA8LSBub25fdm90ZXJzIHw+IApncm91cF9ieShRMjYpIHw+CnN1bW1hcml6ZSAoY291bnRfdm90ZXJzID0gbigpKQpgYGAKYGBge3J9CndlaWdodF9yZXNwb25zZVEyNiA8LSBub25fdm90ZXJzIHw+IAogIGZpbHRlcihRMjYgIT0gLTEpIHw+CiAgZ3JvdXBfYnkoUTI2KSB8PiAKICBzdW1tYXJpemUoY291bnRfd2VpZ2h0ID0gc3VtKHdlaWdodCkpIHw+IAogIG11dGF0ZShwZXJjZW50YWdlID0gKChjb3VudF93ZWlnaHQgLyA1NzU3Ljk4OSkgKiAxMDApKQpgYGAKCmBgYHtyfQp0b3RhbF93ZWlnaHQgPC0gbm9uX3ZvdGVycyB8PgpmaWx0ZXIoUTI2ICE9IC0xKSB8PgpzdW1tYXJpemUodG90YWwgPSBzdW0od2VpZ2h0KSkKYGBgCgo=</div>
 
 
 
