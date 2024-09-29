@@ -28,15 +28,14 @@ non_voters <- read_csv("nonvoters_data.csv")
 
 ```{r}
 voter_responseQ26 <- non_voters |> 
-group_by(Q26) |>
+group_by(voter_category) |>
 summarize (count_voters = n())
 ```
 ```{r}
-weight_responseQ26 <- non_voters |> 
-  filter(Q26 != -1) |>
-  group_by(Q26) |> 
-  summarize(count_weight = sum(weight)) |> 
-  mutate(percentage = ((count_weight / 5757.989) * 100))
+voter_responseQ26 <- non_voters |> 
+  group_by(voter_category) |> 
+  summarize(count_voters = n()) |> 
+  mutate(percentage_voters = (count_voters / 5836) * 100)
 ```
 
 ```{r}
