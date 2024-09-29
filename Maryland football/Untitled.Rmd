@@ -1,0 +1,38 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Turn off scientific notation
+options(scipen=999)
+
+# Load the tidyverse. If you have not installed the tidyverse already, remove the # from the next line and run it first.  
+# install.packages('tidyverse')
+library(tidyverse)
+library(lubridate)
+```
+
+```{r}
+# Load the football data
+football_games <- read_csv("footballlogs1124.csv")
+```
+```{r}
+teams_with_fewer_turnovers <- football_games |> 
+  mutate(
+    wins = case_when(
+      grepl("W", Outcome) ~ 1, 
+      grepl("L", Outcome) ~ 0),
+    turnover_diff = TotalTurnovers - DefTotalTurnovers
+  ) |> 
+  filter(wins == 0, turnover_diff <= -4) |> 
+  select(Date, Team, TotalTurnovers, DefTotalTurnovers, Outcome) 
+```
