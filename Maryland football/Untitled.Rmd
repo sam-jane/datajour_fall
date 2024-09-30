@@ -34,5 +34,5 @@ teams_with_fewer_turnovers <- football_games |>
     turnover_diff = TotalTurnovers - DefTotalTurnovers
   ) |> 
   filter(wins == 0, turnover_diff <= -4) |> 
-  select(Date, Team, TotalTurnovers, DefTotalTurnovers, Outcome) 
+  select(Date, Team, Opponent, Result, TotalTurnovers, DefTotalTurnovers, Outcome) 
 ```
