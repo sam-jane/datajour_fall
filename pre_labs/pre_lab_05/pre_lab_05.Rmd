@@ -148,7 +148,7 @@ We can get this by using mutate and arrange:
 ### Task 10: Asking Demographic Questions
 
 **Task** Using mutate, let's find the county with the highest 18+ Black population as a percentage of all population 18 and over and also the percentage of Democrats in that county. Put your answers below. **Answer**
-## Prince George's county had the highest population of 18+ African Americans. The percentage of Democrats was 78%, which is also one of the highest.
+## Prince George's county had the highest population of 18+ African Americans. The percentage of Democrats was 78%, which is also one of the highest in Maryland.
 
 ```{r}
 maryland_population_with_voters_and_demographics |>
