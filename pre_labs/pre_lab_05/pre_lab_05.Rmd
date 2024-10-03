@@ -94,7 +94,7 @@ We can do this join multiple ways and get a similar result. We can put the popul
 
 ```{r}
 # with nrow included to show row total
-maryland_population |> left_join(county_voters_2020, join_by(COUNTY)) 
+maryland_population |> left_join(county_voters_2020, join_by(COUNTY)) |> nrow()
 ```
 
 Remove the nrow and run it again for yourself. By default, dplyr will do a “natural” join, where it’ll match all the matching columns in both tables. So if we take out the by, it’ll use all the common columns between the tables. That may not be right in every instance but let’s try it. If it works, we should get 24 rows.
