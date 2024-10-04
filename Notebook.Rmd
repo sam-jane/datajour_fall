@@ -1,12 +1,15 @@
----
-title: "Notebook"
-output: html_notebook
----
-
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
-
+title: "Reverse Engineering Project"
+author: "Sam Jane, Loretta Pulwer, Katharine Wilson"
+date: "October 3, 2024"
+output:
+  html_document: 
+    theme: cerulean
+    highlight: pygments
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+      
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -20,12 +23,26 @@ options(scipen=999)
 library(tidyverse)
 library(lubridate)
 ```
+## Introduction 
 
+In this notebook, we are reverse engineering the story, [Why many Americans don't vote](https://projects.fivethirtyeight.com/non-voters-poll-2020-election/)
+
+## Load libraries
 ```{r}
 # Load the non voters data
 non_voters <- read_csv("nonvoters_data.csv")
 ```
+## Load and Cleaning Data
 
+The source of the data was a Pew Research Center survey that asked Americans on a scale of one through four how likely they were to vote in elections. This also asked other follow up questions, such as how long do you wait in line, what's the probability you leave work, etc. Some of the problems with this data was the weighting of people, there was a certain weight column that influenced if we could count users listed as whole individual people.
+
+## Sentences to Engineer
+In this notebook, we are reverse engineering five sentences from the story.
+
+### Sentence 1
+
+* **Sentence text**: Of the 8,000-plus people we polled, we were able to match nearly 6,000 to their voting history. We analyzed the views of the respondents in that slightly smaller group, and found that they fell into three broad groups: 1) people who almost always vote; 2) people who sometimes vote; and 3) people who rarely or never vote. People who sometimes vote were a plurality of the group (44 percent), while 31 percent nearly always cast a ballot and just 25 percent almost never vote.
+* **Analysis summary**: We found that most Americans are sporadic in their voting habbits, followed by Americans who always vote. Sporadic had the highest difference between the two, meaning that most Americans are going to vote in some elections, and not vote in others.
 ```{r}
 voter_responseQ26 <- non_voters |> 
 group_by(voter_category) |>
@@ -44,3 +61,62 @@ filter(Q26 != -1) |>
 summarize(total = sum(weight))
 ```
 
+### Sentence 2
+
+* **Sentence text**: Of the three groups of voters we identified, those voters who only vote some of the time were actually the likeliest to report having stood in line for more than an hour; they were also likelier than those who vote more regularly to say they couldn’t get off work to vote.”
+* **Analysis summary**: We were able to confirm the finding, showing that nearly 21& of sporadic voters found themselves in line at a voter box for over an hour and nearly 13% said they could not vote because it was difficult to take work off. This confirmed the results of the study.
+
+```{r}
+# Load the non voters data
+non_voters <- read_csv("nonvoters_data.csv")
+```
+
+```{r}
+# Waiting in line ?
+non_voters |>
+  filter(Q18_8 == 1) |>
+  group_by(voter_category) |>
+  summarise(count = n())
+```
+
+```{r}
+# Percentage
+333/1811 *100
+241/1451 *100
+531/2574 *100
+```
+
+```{r}
+# Who couldn't get off work?
+non_voters |>
+  filter(Q18_7 == 1) |>
+  group_by(voter_category) |>
+  summarise(count = n())
+```
+
+```{r}
+# Percentage
+121/1811 *100
+186/1451 *100
+251/2574 *100
+```
+
+### Sentence 3
+
+* **Sentence text**: There are, of course, other systemic reasons why some people might vote more inconsistently. Our survey found, for instance, that occasional voters were slightly more likely than frequent voters to have a long-term disability (8 percent vs. 5 percent), and nonvoters were even more likely to fall into this category (12 percent).
+* **Analysis summary**: Are numbers matched the Pew Research article, except they rounded up in their findings. This is interesting, although it makes sense, because having a disability would make it difficult to vote. There are easier options to vote that are starting to become more common, such as absentee ballots and early voting that could make voting in elections more accessible for people with disabilities.
+
+```{r}
+# Disabilities 
+non_voters |>
+  filter(Q10_1 == 1) |>
+  group_by(voter_category) |>
+  summarise(count = n())
+```
+
+```{r}
+# Percentage
+88/1811 *100
+168/1451 *100
+213/2574 *100
+```
