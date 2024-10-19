@@ -140,4 +140,18 @@ summarise(voter_count = n())
 **A5**
 
 ```{r}
+medianzip <- get_acs(geography = "zcta",
+                     variables = "B01002_001",
+                     year = 2019,
+                     state = "MD")
+              
+```
+```{r}
+md_zipcodes <- md_zipcodes |>
+  mutate(zipcode = as.character(zipcode))
+```
+
+```{r}
+zips_combined <- md_zipcodes |>
+  left_join(medianzip, by = c("zipcode" = "GEOID"))
 ```
