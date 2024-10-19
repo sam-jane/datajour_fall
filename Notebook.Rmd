@@ -157,27 +157,28 @@ non_voters|>
   summarise(count=n())
 ```
 ### Sentence 5
-* **Sentence text**: “In the survey, we asked voters who have missed at least one national election — which included some people who almost always vote — why they didn’t cast a ballot...But another 31 percent said that they decided not to vote because they disliked the candidates or they thought nothing would change as a result of the election (26 percent).
-* **Analysis summary**: 
+* **Sentence text**: “In the survey, we asked voters who have missed at least one national election — which included some people who almost always vote — why they didn’t cast a ballot...But another 31 percent said that they decided not to vote because they disliked the candidates.
+* **Analysis summary**: We got the same percentage of people who said they decided not to vote because they disliked the candidates. This is interesting because it reflects on the impacts of our two party system. 
+
+We found this answer by filtering to look only at the people who regularly or sporadicly vote. We then filtered by people who responded to Q29, which means that they have missed at least one national election. We then grouped by their answer to Q29_1 (which meant that they decided not to vote because they didn't like the candidate). We then got the percentage of that number from the people who have missed at least one national election who vote at least occasionally. 
 
 ```{r}
-q29_non_voters <- non_voters |>
-  group_by(Q29_1)|>
-  summarise(count=n())
+real_non_voters <- non_voters |> 
+  filter(voter_category == "always"|voter_category == "sporadic")
 ```
+
+
 ```{r}
-(362 / 980)*100
-```
-```{r}
-missed_non_voters <- non_voters |> 
+real_non_voters_filtered <- real_non_voters |> 
   filter(Q29_1 == 1 | Q29_2 == 1 | Q29_3 == 1 | Q29_4 == 1 | Q29_5 == 1 | Q29_6 == 1 | Q29_7 == 1 | Q29_8 == 1 | Q29_9 == 1 | Q29_10 == 1)
 ```
 
 
 ```{r}
-missed_non_voters |>
+real_non_voters_filtered |>
   group_by(Q29_1)|>
   summarise(count=n())
 ```
 ```{r}
-(362 / 1275)*100
+(110 / 345)*100
+```
