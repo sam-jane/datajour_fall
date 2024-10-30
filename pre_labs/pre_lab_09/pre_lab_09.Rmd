@@ -96,6 +96,8 @@ To do that, click on the "PNG" icon. Finally, click the "Download image" button.
 
 **Answer** Copy the url of the graphic you published here. It will begin with <https://datawrapper.dwcdn.net/>. Don't copy the browser's current url.
 
+https://www.datawrapper.de/_/VaxQC/
+
 ### Task 8: Make a Choropleth Map
 
 Let's create a choropleth map - one that shows variations between the percentage of votes received by Wes Moore across Maryland counties in 2022. We'll read that in from the data folder.
@@ -111,10 +113,14 @@ In order to make a map, we need to be able to tell Datawrapper that a certain co
 **Task** Write code to add columns showing the total number of votes for each county and the percentage of votes received by Wes Moore in each county, then replace the CSV file in the data folder with it.
 
 ```{r}
-
-# calculate the total number of votes and Moore's percentage, saving it back to the md_gov_county dataframe
-
-write_csv(md_gov_county, "data/md_gov_county.csv")
+md_gov_county <- md_gov_county |>
+  group_by(County) |>
+  mutate(
+    total_votes = sum(Cox + Moore + Lashar + Wallace + Harding, na.rm = TRUE),  
+    moore_percentage = (Moore / total_votes) * 100 
+  ) |>
+  ungroup()
+write.csv(md_gov_county, "data/md_gov_county_updated.csv", row.names = FALSE)
 ```
 
 **Task** Go back to Datawrapper and click on "New Map". Click on "Choropleth map" and then choose "USA \>\> Counties (2022)" for the map base and click the Proceed button.
@@ -137,7 +143,7 @@ knitr::include_graphics("images/datawrapper8.png")
 
 You'll see that the map currently is of the whole nation, and we only have Maryland data. Let's fix that.
 
-**Task** Look for "Hide regions without data" under Appearance, and click the slider icon to enable that feature. You should see a map zoomed into Maryland with some counties in various colors. **Answer** Describe the changes from the previous map
+**Task** Look for "Hide regions without data" under Appearance, and click the slider icon to enable that feature. You should see a map zoomed into Maryland with some counties in various colors. **Answer** This now shows the zoomed in map
 
 But it's a little rough visually, so let's clean that up.
 
@@ -145,10 +151,13 @@ But it's a little rough visually, so let's clean that up.
 
 That's better, but check out the tooltip by hovering over a county. It's not super helpful. Let's change the tooltip behavior to show the county name and a better-formatted number.
 
-**Task** Click the "Customize tooltips" button so it expands down. Change {{ fips_code }} to {{ county }} and {{ pctmoore }} to {{ FORMAT(pctmoore, "00.0%")}} **Answer** Describe the changes from the previous map
+**Task** Click the "Customize tooltips" button so it expands down. Change {{ fips_code }} to {{ county }} and {{ pctmoore }} to {{ FORMAT(pctmoore, "00.0%")}} **Answer** Describe the changes from the previous map. 
+##It changed it to just include the county with the Moore percentage of the total
 
 **Task** Add a note that says that this data represents votes counted through Nov. 10 and an alternative description for screen readers. This should be a simple description of what your map shows. Experiment with the "Show labels" button, choosing the "by column" option for Type to display some or all of the county names.
 
 Ok, that looks better. Let's publish!
 
 **Task** Click the "Proceed" button until you get to the "Publish & Embed" tab, then click "Publish Now". Copy the published URL (like you did for the chart above) and paste it below. **Answer** Put the URL of your map here.
+
+https://www.datawrapper.de/_/dSYg9/
