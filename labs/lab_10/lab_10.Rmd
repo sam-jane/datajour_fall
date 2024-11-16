@@ -170,9 +170,49 @@ ggplot(data = map_data) +
 **Q4.** Choose your own map adventure! In the data folder I've included Maryland county-level results for the abortion rights amendment vote this year, plus the 2020 presidential results by county and 2022 governor's results by county. Using one of those and at least one other contest for comparison, make a county-level map showing what you think is the most interesting aspect of that data, and describe the results in terms of a possible story. You can bring in other data, such as Census information, if you like.
 
 **A4.**
+# I think this shows that while there defintely was people who voted for abortion rights and Hogan, that difference was much less than I thought. This was one of the questions I had, and it showed that abortion was clearly a difference maker for voters.
 
 ```{r}
+abortion_data <- read_csv("data/md_abortion_24.csv") |> 
+  clean_names()
 
+abortion_data <- abortion_data |> 
+  rename(
+    yes = `for`, 
+    no = against
+  )
+
+abortion_data <- abortion_data |> 
+  mutate(
+    total_votes = yes + no,
+    abortion_percentage = ( yes / total_votes) * 100
+  )
+
+percent_data_abortion <- hogan_data |> 
+  select(county, hogan_percentage) |> 
+  left_join(
+    abortion_data |> select(county, abortion_percentage), 
+    by = "county"
+  ) |> 
+  mutate(
+    percent_diff_abortion_hogan = abortion_percentage - hogan_percentage
+  )
+
+map_data_abortion <- counties_md |> 
+  left_join(percent_data_abortion, by = c("NAME" = "county"))
+
+ggplot(data = map_data_abortion) +
+  geom_sf(aes(fill = percent_diff_abortion_hogan), color = "white") +
+  scale_fill_gradient2(
+    low = "red", mid = "gray", high = "purple",
+    midpoint = 0,
+    name = "Abortion Rights - Hogan (%)"
+  ) +
+  labs(
+    title = "Difference in Voters for Abortion Rights and Larry Hogan in Maryland",
+    caption = "Data sources: md_senate_county_24.csv and md_abortion_county_24.csv"
+  ) +
+  theme_minimal()
 ```
 
 -30-
